@@ -17,7 +17,7 @@ allprojects {
 
  ```sh
 dependencies {
-        implementation 'com.github.dionisiofilho:CustomDialog:1.0.0'
+        implementation 'com.github.dionisiofilho:CustomDialog:x.x.x'
 }
 ```
 
