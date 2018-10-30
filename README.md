@@ -1,4 +1,5 @@
 
+# Version
 [![](https://jitpack.io/v/dionisiofilho/CustomDialog.svg)](https://jitpack.io/#dionisiofilho/CustomDialog)
 
 # Custom Dialog
