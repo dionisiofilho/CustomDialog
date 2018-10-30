@@ -19,7 +19,6 @@ allprojects {
 dependencies {
         implementation 'com.github.dionisiofilho:CustomDialog:1.0.0'
 }
-}
 ```
 
 # Utilizando o CustomDialog
