@@ -3,14 +3,13 @@ package com.dionisiofilho.dialog.custom
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
-import android.databinding.DataBindingUtil
 import android.support.annotation.ColorInt
 import android.support.annotation.StringRes
 import android.support.v4.content.ContextCompat
 import android.view.View
 import android.view.WindowManager
+import android.widget.TextView
 import com.dionisiofilho.dialog.R
-import com.dionisiofilho.dialog.databinding.DialogCustomBinding
 import org.jetbrains.annotations.NotNull
 
 class CustomDialog(ctx: Context) : View(ctx) {
@@ -110,22 +109,21 @@ class CustomDialog(ctx: Context) : View(ctx) {
 
     private fun prepareDialog(@ColorInt color: Int) {
 
-
-        viewHolderDialog.databindingCustomDialog.tvDialogTitle.setBackgroundColor(color)
-        viewHolderDialog.databindingCustomDialog.tvDialogTitle.text = title
-        viewHolderDialog.databindingCustomDialog.tvDialogMessage.text = message
+        viewHolderDialog.title.setBackgroundColor(color)
+        viewHolderDialog.title.text = title
+        viewHolderDialog.message.text = message
 
 
         if (listenerCancel == null) {
-            viewHolderDialog.databindingCustomDialog.btnCancelDialog.visibility = View.GONE
+            viewHolderDialog.btnCancel.visibility = View.GONE
         } else {
-            viewHolderDialog.databindingCustomDialog.btnCancelDialog.setOnClickListener {
+            viewHolderDialog.btnCancel.setOnClickListener {
                 dialog.dismiss()
-                listenerCancel?.let { function -> function.invoke() }.run { return@setOnClickListener }
+                listenerCancel?.let { function -> function.invoke() }?:run { return@setOnClickListener }
             }
         }
 
-        viewHolderDialog.databindingCustomDialog.btnConfimDialog.setOnClickListener {
+        viewHolderDialog.btn_confirm.setOnClickListener {
             dialog.dismiss()
             listenerConfirm()
         }
@@ -156,8 +154,11 @@ class CustomDialog(ctx: Context) : View(ctx) {
     }
 
 
-    class ViewHolderDialog(view: View) {
-        val databindingCustomDialog: DialogCustomBinding = DataBindingUtil.bind(view)
+    open class ViewHolderDialog(view: View) {
+        val title = view.findViewById(R.id.tv_dialog_title) as TextView
+        val message = view.findViewById(R.id.tv_dialog_message) as TextView
+        val btn_confirm = view.findViewById(R.id.btn_confim_dialog) as TextView
+        val btnCancel = view.findViewById(R.id.btn_cancel_dialog) as TextView
     }
 
 
